@@ -36,11 +36,17 @@ The Coffee Bean Sales raw dataset was provided by Kaggle user Saad Haroon. Initi
 
 During the initial SQL analysis, the focus was on gaining an understanding of the data and performing some necessary reformatting. To enhance the readability of the analysis, the 'Order Date' column was reformatted from a DATETIME to a DATE data type.
 
+![](images/total_rev_profit.png)
+
 After formatting, all three tables joined together using a LEFT JOIN and resulting query was stored into a temporary table (**#CoffeeSales**). This table includes only the columns necessary for the analysis.
 
-From the **#CoffeeSales** table, I examined total revenue, profit as well as using PARTITION to identify products with the highest average revenue alongside their total revenue. 
+From the **#CoffeeSales** table, I examined total revenue, profit as well as using PARTITION to compare each products revenue to the average yearly revenue.
+
+![](images/partition_sql.png)
 
 To better understand the profit margin withing each product, I created a CASE statement for a quick overview of products that were high profit, moderate profit and low profit. 
+
+![](images/Case_statement.png)
 
 Additionally, the analysis delved into understanding sales based on factors like loyalty card membership, countries, coffee types, and roast types. This provided valuable insights into the sources of sales and customer preferences.
 

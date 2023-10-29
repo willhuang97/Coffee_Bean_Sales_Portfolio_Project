@@ -96,27 +96,23 @@ SELECT YEAR([Order Date]) AS Order_Year, ROUND(SUM([Quantity] * [Unit Price]),2)
 FROM #CoffeeSales
 GROUP BY YEAR([Order Date])
 
-
 -------------------------------------------------------
 
--- What is the average revenue for each product category (Product ID) compare to year average revenue and What product had the highest revenue?
+-- What is the average revenue for each product category (Product ID) and What product had the highest revenue?
+
 WITH ProductRev AS (
   SELECT
     [Product ID],
-    ROUND(SUM([Quantity] * [Unit Price]), 2) AS total_revenue,
-    YEAR([Order Date]) AS Order_Year  
+    ROUND(SUM([Quantity] * [Unit Price]), 2) AS total_revenue
   FROM #CoffeeSales
-  GROUP BY [Product ID], YEAR([Order Date]) 
+  GROUP BY [Product ID] 
 )
 SELECT
   [Product ID],
-  Order_Year,
-  total_revenue,  -- You can use the alias directly in the SELECT
-  ROUND(AVG(total_revenue) OVER (PARTITION BY Order_Year),2) AS Year_Avg_Revenue
+  total_revenue,
+  AVG(total_revenue) OVER (PARTITION BY [Product ID]) AS Average_Revenue
 FROM ProductRev
-ORDER BY Order_Year;
-
-
+ORDER BY Average_Revenue DESC
 
 
 -------------------------------------------------------
